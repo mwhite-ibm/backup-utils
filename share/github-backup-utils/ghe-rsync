@@ -25,13 +25,9 @@ else
   done
 fi
 
-#(rsync "${parameters[@]}" $GHE_EXTRA_RSYNC_OPTS 3>&1 1>&2 2>&3 3>&- |
-#  (egrep -v "$ignoreout" || true)) 3>&1 1>&2 2>&3 3>&- |
-#  (egrep -v "$ignoreout" || true)
-
-# Code change recommended by Logan at GitHub to hopefully avoid out of memory errors.
-(rsync "${parameters[@]}" $GHE_EXTRA_RSYNC_OPTS 3>&1 1>&2 2>&3 3>&- |
-(egrep -v "$ignoreout" || true)) 3>&1 1>&2 2>&3 3>&- 
+rsync "${parameters[@]}" $GHE_EXTRA_RSYNC_OPTS 3>&1 1>&2 2>&3 3>&- 
+# | (egrep -v "$ignoreout" || true)) 3>&1 1>&2 2>&3 3>&-
+# | (egrep -v "$ignoreout" || true)
 res=$?
 
 # Suppress exits with 24.
